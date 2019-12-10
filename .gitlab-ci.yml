@@ -21,18 +21,10 @@ bumpVersion:
     - echo $REPO_SSH
     - echo $REPO_ADR
     - git push origin $CI_COMMIT_REF_NAME
-    - mvn release:clean release:prepare
-      $MAVEN_CLI_OPTS
-      -DreleaseVersion=$VERSION
-      -DdevelopmentVersion=$NEW_VERSION
-      -Dtag="Version-${VERSION}"
-      -DskipTests=true
-      -Darguments=-DskipTests
-    - mvn release:perform
-      $MAVEN_CLI_OPTS
-      -DskipTests=true
-      -Darguments=-DskipTests
   only:
+  refs:
+      - master
+      - CItesting
     variables:
       - $VERSION
 
