@@ -22,7 +22,7 @@ bumpVersion:
     - echo $REPO_ADR
     - git push origin $CI_COMMIT_REF_NAME
   only:
-  refs:
+    refs:
       - master
       - CItesting
     variables:
