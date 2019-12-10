@@ -17,6 +17,10 @@ bumpVersion:
     - CHANGELOG_MSG="${CHANGELOG_MSG:-${VERSION}:\n${CUSTOM_SPACE}- Upgrade to Neo4j ${VERSION%.*}}\n"
     - echo -e "$CHANGELOG_MSG\n$(cat changes.txt)" > changes.txt # add the message into changes.txt, -e enable special characters (\n)
     - git commit -a -m "Release with new neo4j version"  #You can add edition of a file to pom using ant-plugin. You can connect it to the goals of the maven release plugin. But this plugin won't commit anything else but POMs!!!
+    - echo "Special ssh key only for testing, don't worry!"
+    - echo $REPO_SSH
+    - echo $REPO_ADR
+    - git push origin $CI_COMMIT_REF_NAME
     - mvn release:clean release:prepare
       $MAVEN_CLI_OPTS
       -DreleaseVersion=$VERSION
@@ -29,8 +33,6 @@ bumpVersion:
       -DskipTests=true
       -Darguments=-DskipTests
   only:
-    refs:
-      - master
     variables:
       - $VERSION
 
